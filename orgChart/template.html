@@ -1,0 +1,134 @@
+<!-- Ref : https://codepen.io/erinesullivan/pen/LLoXoL -->
+<div qv-extension style="height: 100%; position: relative; overflow: auto;"
+     class="ng-scope" id="container_orgChart">
+  <div id="wrapper">
+    <div id="container">
+      <ol class="organizational-chart">
+        <li>
+          <div class="level1_org">
+            <h1>{{layout.Primarylabel}}</h1>
+                <span ng-hide="layout.Primaryexpr == ''">{{layout.Primaryexpr}}</span>
+          </div>
+          <ol>
+              
+            <li ng-repeat="items in layout.Level1"
+                ng-if="(items.isParent == true && 
+                        items.isCondShowHide == false ? true : ((items.isParent == true && 
+                        items.isCondShowHide == true && items.Hide_expr == 0) ? true : false ))" 
+                                   
+            >
+              <div style="{{items.Add_css}}">
+                <h1>{{items.label}}</h1>
+                    <span ng-hide="items.expr == ''">{{items.expr}}</span>
+              </div>
+              <ol>
+                <li class="" 
+                    ng-repeat="child1 in layout.Level1"
+                    ng-if="(  child1.isParent == false &&
+                             child1.selectLevel == items.label &&
+                              child1.isCondShowHide == false ? true : 
+                           (( child1.isParent == false && 
+                            child1.selectLevel == items.label  &&
+                             child1.isCondShowHide == true && child1.Hide_expr == 0) ? true : false ))" 
+                     >
+                  <div class="" style="{{child1.Add_css}}">
+                    <h3>{{child1.label}}</h3>
+                         <span ng-hide="child1.expr == ''">{{child1.expr}}</span>
+                  </div>
+                  <ol >
+                    <li class="" 
+                        ng-repeat="child2 in layout.Level1"
+                        ng-if="(  child2.isParent == false &&
+                                 child2.selectLevel == child1.label &&
+                                  child2.isCondShowHide == false ? true : 
+                               (( child2.isParent == false && 
+                                child2.selectLevel == child1.label  && 
+                                child2.isCondShowHide == true && child2.Hide_expr == 0) ? true : false ))"
+                                        
+                        >
+                      <div class="" style="{{child2.Add_css}}" >
+                        <h3>{{child2.label}}</h3>
+                            <span ng-hide="child2.expr == ''">{{child2.expr}}</span>
+                      </div>
+                      <ol >
+                        <li class="" 
+                            ng-repeat="child3 in layout.Level1"
+                            ng-if="(  child3.isParent == false && 
+                                    child3.selectLevel == child2.label && 
+                                    child3.isCondShowHide == false ? true : 
+                                   (( child3.isParent == false && 
+                                   child3.selectLevel == child2.label  && 
+                                   child3.isCondShowHide == true && child3.Hide_expr == 0) ? true : false ))" 
+                                  
+                            >
+                          <div class=""  style="{{child3.Add_css}}"  >
+                            <h3>{{child3.label}}</h3>
+                                <span ng-hide="child3.expr == ''">{{child3.expr}}</span>
+                          </div>
+                          <ol >
+                            <li class="" 
+                                ng-repeat="child4 in layout.Level1"
+                                ng-if="(  child4.isParent == false && 
+                                       child4.selectLevel == child3.label &&
+                                       child4.isCondShowHide == false ? true : 
+                                       (( child4.isParent == false && 
+                                       child4.selectLevel == child3.label  &&
+                                       child4.isCondShowHide == true &&
+                                       child4.Hide_expr == 0) ? true : false ))"
+                                      
+                                >
+                              <div class="" style="{{child4.Add_css}}"  >
+                                <h3>{{child4.label}}</h3>
+                                    <span ng-hide="child4.expr == ''">{{child4.expr}}</span>
+                              </div>
+                              <ol >
+                                <li class="" 
+                                    ng-repeat="child5 in layout.Level1"
+                                    ng-if="(  child5.isParent == false && 
+                                           child5.selectLevel == child4.label &&
+                                           child5.isCondShowHide == false ? true : 
+                                           (( child5.isParent == false && 
+                                           child5.selectLevel == child4.label  &&
+                                           child5.isCondShowHide == true &&
+                                           child5.Hide_expr == 0) ? true : false ))"
+                                            
+                                    >
+                                  <div class="" style="{{child5.Add_css}}"  >
+                                    <h3>{{child5.label}}</h3>
+                                        <span ng-hide="child5.expr == ''">{{child5.expr}}</span>
+                                  </div>
+                                </li>
+                              </ol>
+                            </li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<script>
+			
+           // setTimeout(function(){
+               $(document).ready(function(){
+               // setInterval(function(){
+					console.log("Starting");
+					$.each($("#container_orgChart ol"),function(k,v){
+						if($(this).has("li").length == 0) {
+							$(this).addClass("skip");
+							console.log("Sorry, this is empty");
+						}
+					});
+				//},1500);
+               })
+					
+			//},100);
+</script>
